@@ -1,2 +1,5 @@
 line-bot-sdk
 flask
+requests
+BeautifulSoup
+bs4
