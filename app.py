@@ -14,7 +14,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage
 )
 
 app = Flask(__name__)
@@ -44,9 +44,15 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    url="http://www.9800.com.tw/lotto38/statistics.html"
+    msg += "20: %s\n" % str(getMagicNumber(url)) 
+    url="http://www.9800.com.tw/lotto38/statistics10.html"
+    msg += "10: %s\n" % str(getMagicNumber(url))
+    url="http://www.9800.com.tw/lotto38/statistics50.html"
+    msg += "50: %s\n" % str(getMagicNumber(url))
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=msg))
 
 def getHistoryNormalNumber(url):
     res  = requests.get(url)
@@ -87,10 +93,4 @@ def getMagicNumber(url):
     return sorted(jp), random.choice(s)
 
 if __name__ == '__main__':
-    url="http://www.9800.com.tw/lotto38/statistics.html"
-    print "20: %s" % str(getMagicNumber(url))
-    url="http://www.9800.com.tw/lotto38/statistics10.html"
-    print "10: %s" % str(getMagicNumber(url))
-    url="http://www.9800.com.tw/lotto38/statistics50.html"
-    print "50: %s " % str(getMagicNumber(url))
     app.run()
