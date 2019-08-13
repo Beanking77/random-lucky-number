@@ -5,6 +5,49 @@ import re
 from bs4 import BeautifulSoup
 import random
 
+from flask import Flask, request, abort
+
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError
+)
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage,
+)
+
+app = Flask(__name__)
+
+line_bot_api = LineBotApi('PHuXH5SG5kB5c3cvAMX6BnGVI9RK4F/D+oOEgzdEONlnsl7IEd/GXlSyhuVcFPAItbz+leGrCNW/1gsRcDje/auILLF33vFYp+qHkd6zysU1aMDwf8RJDel7ZsgTx4+U65dqpvRjTztNUlT7Ql25FAdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('81fc893049b942fe6e0ba189b58d212a')
+
+
+@app.route("/callback", methods=['POST'])
+def callback():
+    # get X-Line-Signature header value
+    signature = request.headers['X-Line-Signature']
+
+    # get request body as text
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    # handle webhook body
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        print("Invalid signature. Please check your channel access token/channel secret.")
+        abort(400)
+
+    return 'OK'
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=event.message.text))
+
 def getHistoryNormalNumber(url):
     res  = requests.get(url)
     soup = BeautifulSoup(res.text,'html.parser')
@@ -50,3 +93,4 @@ if __name__ == '__main__':
     print "10: %s" % str(getMagicNumber(url))
     url="http://www.9800.com.tw/lotto38/statistics50.html"
     print "50: %s " % str(getMagicNumber(url))
+    app.run()
