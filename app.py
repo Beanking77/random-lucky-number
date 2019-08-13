@@ -94,4 +94,4 @@ def getMagicNumber(url):
 
 if __name__ == '__main__':
     myPORT = int(os.environ.get('PORT', 8000))
-    app.run(debug=True, port=myPORT;
+    app.run(debug=True, port=myPORT)
