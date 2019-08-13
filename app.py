@@ -46,7 +46,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if (event.message.text.split(' ')[0]=="wl")
+    if (event.message.text.split(' ')[0]=="wl"):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="幸運數字產生中..."))
@@ -60,7 +60,10 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=msg))
-
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="目前支援關鍵字: wl"))
 def getHistoryNormalNumber(url):
     res  = requests.get(url)
     soup = BeautifulSoup(res.text,'html.parser')
