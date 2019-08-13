@@ -47,9 +47,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if (event.message.text.split(' ')[0]=="wl"):
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="幸運數字產生中..."))
+        line_bot_api.push_message(event.source.user_id, TextSendMessage(text="幸運數字產生中..."))
         msg = "幸運數字:\n"
         url = "http://www.9800.com.tw/lotto38/statistics10.html"
         msg += "近10期隨機: %s\n" % str(getMagicNumber(url))
