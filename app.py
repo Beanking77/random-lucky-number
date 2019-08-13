@@ -4,6 +4,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 import random
+import os
 
 from flask import Flask, request, abort
 
