@@ -93,6 +93,6 @@ def getMagicNumber(url):
     return sorted(jp), random.choice(s)
 
 if __name__ == '__main__':
-    var myPORT = process.env.PORT || 8000;
+    myPORT = int(os.environ.get('PORT', 8000))
     app.run(debug=options.debug, port=myPORT;
 )
