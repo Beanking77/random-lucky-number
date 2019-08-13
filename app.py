@@ -45,13 +45,13 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    msg = ""
-    url = "http://www.9800.com.tw/lotto38/statistics.html"
-    msg += "20: %s\n" % str(getMagicNumber(url)) 
+    msg = "Lucky Number:\n"
     url = "http://www.9800.com.tw/lotto38/statistics10.html"
-    msg += "10: %s\n" % str(getMagicNumber(url))
+    msg += "近10期隨機: %s\n" % str(getMagicNumber(url))
+    url = "http://www.9800.com.tw/lotto38/statistics.html"
+    msg += "近20期隨機: %s\n" % str(getMagicNumber(url)) 
     url = "http://www.9800.com.tw/lotto38/statistics50.html"
-    msg += "50: %s\n" % str(getMagicNumber(url))
+    msg += "近50期隨機: %s\n" % str(getMagicNumber(url))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
