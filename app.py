@@ -45,6 +45,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    var msg = ""
     url="http://www.9800.com.tw/lotto38/statistics.html"
     msg += "20: %s\n" % str(getMagicNumber(url)) 
     url="http://www.9800.com.tw/lotto38/statistics10.html"
