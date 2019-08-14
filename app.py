@@ -99,7 +99,7 @@ def getHistorySpecialNumber(url):
     return special_ball
 
 def getMagicNumber(url, game_type):
-    normal = getHistoryNormalNumber(url)
+    normal = getHistoryNormalNumber(url, game_type)
     if game_type == "wl":
         num_length = 6
         s = getHistorySpecialNumber(url)
