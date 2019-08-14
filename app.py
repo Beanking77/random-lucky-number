@@ -46,6 +46,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    
     game_type = event.message.text.split(' ')[0]
     game_category = ""
     if game_type != "wl" and game_type != "bl":
@@ -63,6 +64,7 @@ def handle_message(event):
         to_id = event.source.groupId
     else:
         to_id = event.source.user_id
+    print event.source.type, to_id
     line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"幸運數字產生中..."))
     msg = game_name + " 幸運數字:\n"
     url = "http://www.9800.com.tw/"+game_category+"/statistics10.html"
