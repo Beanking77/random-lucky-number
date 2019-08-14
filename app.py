@@ -46,11 +46,12 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    event_token = event.reply_token
     game_type = event.message.text.split(' ')[0]
     game_category = ""
     if game_type != "wl" and game_type != "bl":
         line_bot_api.reply_message(
-            event.reply_token,
+            event_token,
             TextSendMessage(text="目前支援關鍵字: wl, bl"))   
         return
     elif (game_type == "wl"):
@@ -60,7 +61,7 @@ def handle_message(event):
         game_category = "lotto649"
         game_name = "大樂透"
     
-    line_bot_api.push_message(event.source.user_id, TextSendMessage(text=game_name+"幸運數字產生中..."))
+    line_bot_api.reply_message(event_token, TextSendMessage(text=game_name+"幸運數字產生中..."))
     msg = game_name + " 幸運數字:\n"
     url = "http://www.9800.com.tw/"+game_category+"/statistics10.html"
     msg += "近10期隨機: %s\n" % str(getMagicNumber(url, game_type))
@@ -69,7 +70,7 @@ def handle_message(event):
     url = "http://www.9800.com.tw/"+game_category+"/statistics50.html"
     msg += "近50期隨機: %s\n" % str(getMagicNumber(url, game_type))
     line_bot_api.reply_message(
-        event.reply_token,
+        event_token,
         TextSendMessage(text=msg))
 def getHistoryNormalNumber(url, game_type):
     res  = requests.get(url)
