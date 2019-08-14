@@ -46,31 +46,42 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if (event.message.text.split(' ')[0]=="wl"):
-        line_bot_api.push_message(event.source.user_id, TextSendMessage(text="幸運數字產生中..."))
-        msg = "幸運數字:\n"
-        url = "http://www.9800.com.tw/lotto38/statistics10.html"
-        msg += "近10期隨機: %s\n" % str(getMagicNumber(url))
-        url = "http://www.9800.com.tw/lotto38/statistics.html"
-        msg += "近20期隨機: %s\n" % str(getMagicNumber(url)) 
-        url = "http://www.9800.com.tw/lotto38/statistics50.html"
-        msg += "近50期隨機: %s\n" % str(getMagicNumber(url))
+    game_type = event.message.text.split(' ')[0]
+    game_category = ""
+    if game_type != "wl" or game_type != "bl":
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=msg))
-    else:
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="目前支援關鍵字: wl"))
-def getHistoryNormalNumber(url):
+            TextSendMessage(text="目前支援關鍵字: wl, bl"))        
+    elif (game_type == "wl"):
+        game_category = "lotto38"
+    elif (game_type == "bl"):
+        game_category = "lotto649"
+    
+    line_bot_api.push_message(event.source.user_id, TextSendMessage(text="幸運數字產生中..."))
+    msg = "幸運數字:\n"
+    url = "http://www.9800.com.tw/"+game_category+"/statistics10.html"
+    msg += "近10期隨機: %s\n" % str(getMagicNumber(url, game_type))
+    url = "http://www.9800.com.tw/"+game_category+"/statistics.html"
+    msg += "近20期隨機: %s\n" % str(getMagicNumber(url, game_type)) 
+    url = "http://www.9800.com.tw/"+game_category+"/statistics50.html"
+    msg += "近50期隨機: %s\n" % str(getMagicNumber(url, game_type))
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=msg))
+def getHistoryNormalNumber(url, game_type):
     res  = requests.get(url)
     soup = BeautifulSoup(res.text,'html.parser')
-    
+    num_length = 0
+    if game_type == "wl":
+        num_length = 39
+    if game_type == "bl":
+        num_length = 49
+        
     wei_li = []
     for i in soup.find_all(style="color:#FF0000; font-weight:bold"):
         wei_li.append(int(i.text))
     
-    for k in range(1,39):
+    for k in range(1,num_length):
     #    print(str(k)+": " + "{:.0%}".format(wei_li.count(k)/float(len(wei_li))))
         wei_li.append(k)
     return wei_li
@@ -87,18 +98,34 @@ def getHistorySpecialNumber(url):
         special_ball.append(l)
     return special_ball
 
-def getMagicNumber(url):
+def getMagicNumber(url, game_type):
     normal = getHistoryNormalNumber(url)
-    s = getHistorySpecialNumber(url)
-
-    jp=[]
-    n=0
-    while n < 7:
+    if game_type == "wl":
+        num_length = 6
+        s = getHistorySpecialNumber(url)
+        jp=[]
+        n=0
+        while n < num_length:
         m = random.choice(normal) 
         if m not in jp:
             jp.append(m)
             n += 1
-    return sorted(jp), random.choice(s)
+        return sorted(jp), random.choice(s)
+    
+    if game_type == "bl":
+        num_length = 7
+            jp=[]
+        n=0
+        while n < num_length:
+        m = random.choice(normal) 
+        if m not in jp:
+            if n == 6:
+                s = m
+            else:
+                jp.append(m)
+            n += 1
+        return sorted(jp), s
+    return
 
 if __name__ == '__main__':
     myPORT = int(os.environ.get('PORT', 5000))
