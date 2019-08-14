@@ -61,7 +61,7 @@ def handle_message(event):
         game_category = "lotto649"
         game_name = "大樂透"
     if event.source.type == "room":
-        to_id = event.source.roomId
+        to_id = event.source.roomd
     else:
         to_id = event.source.user_id
     print event.source.type, to_id
