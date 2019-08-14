@@ -114,7 +114,7 @@ def getMagicNumber(url, game_type):
     
     if game_type == "bl":
         num_length = 7
-            jp=[]
+        jp=[]
         n=0
         while n < num_length:
             m = random.choice(normal) 
