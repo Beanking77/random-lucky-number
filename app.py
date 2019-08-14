@@ -60,8 +60,8 @@ def handle_message(event):
     elif (game_type == "bl"):
         game_category = "lotto649"
         game_name = "大樂透"
-    if event.source.type == "group":
-        to_id = event.source.groupId
+    if event.source.type == "room":
+        to_id = event.source.roomId
     else:
         to_id = event.source.user_id
     print event.source.type, to_id
