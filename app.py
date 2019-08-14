@@ -54,11 +54,13 @@ def handle_message(event):
             TextSendMessage(text="目前支援關鍵字: wl, bl"))        
     elif (game_type == "wl"):
         game_category = "lotto38"
+        game_name = "威力彩"
     elif (game_type == "bl"):
         game_category = "lotto649"
+        game_name = "大樂透"
     
     line_bot_api.push_message(event.source.user_id, TextSendMessage(text="幸運數字產生中..."))
-    msg = "幸運數字:\n"
+    msg = game_name + " 幸運數字:\n"
     url = "http://www.9800.com.tw/"+game_category+"/statistics10.html"
     msg += "近10期隨機: %s\n" % str(getMagicNumber(url, game_type))
     url = "http://www.9800.com.tw/"+game_category+"/statistics.html"
