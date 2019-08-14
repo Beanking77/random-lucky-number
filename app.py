@@ -106,10 +106,10 @@ def getMagicNumber(url, game_type):
         jp=[]
         n=0
         while n < num_length:
-        m = random.choice(normal) 
-        if m not in jp:
-            jp.append(m)
-            n += 1
+            m = random.choice(normal) 
+            if m not in jp:
+                jp.append(m)
+                n += 1
         return sorted(jp), random.choice(s)
     
     if game_type == "bl":
@@ -117,13 +117,13 @@ def getMagicNumber(url, game_type):
             jp=[]
         n=0
         while n < num_length:
-        m = random.choice(normal) 
-        if m not in jp:
-            if n == 6:
-                s = m
-            else:
-                jp.append(m)
-            n += 1
+            m = random.choice(normal) 
+            if m not in jp:
+                if n == 6:
+                    s = m
+                else:
+                    jp.append(m)
+                n += 1
         return sorted(jp), s
     return
 
