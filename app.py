@@ -48,7 +48,7 @@ def callback():
 def handle_message(event):
     game_type = event.message.text.split(' ')[0]
     game_category = ""
-    if game_type != "wl" or game_type != "bl":
+    if game_type != "wl" and game_type != "bl":
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="目前支援關鍵字: wl, bl"))        
