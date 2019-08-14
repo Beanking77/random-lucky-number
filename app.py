@@ -51,7 +51,8 @@ def handle_message(event):
     if game_type != "wl" and game_type != "bl":
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="目前支援關鍵字: wl, bl"))        
+            TextSendMessage(text="目前支援關鍵字: wl, bl"))   
+        break
     elif (game_type == "wl"):
         game_category = "lotto38"
         game_name = "威力彩"
