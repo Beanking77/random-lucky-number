@@ -55,7 +55,6 @@ def handle_message(event):
             template=ButtonsTemplate(
                 title='發大財囉～～',
                 text='點選一個開始產生幸運號碼！',
-                thumbnail_image_url='顯示在開頭的大圖片網址',
                 actions=[
                     MessageAction(
                         label='威力彩',
