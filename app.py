@@ -16,7 +16,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate
+    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, MessageAction
 )
 
 app = Flask(__name__)
@@ -57,11 +57,11 @@ def handle_message(event):
                 text='點選一個開始產生幸運號碼！',
                 thumbnail_image_url='顯示在開頭的大圖片網址',
                 actions=[
-                    MessageTemplateAction(
+                    MessageAction(
                         label='威力彩',
                         text='wl'
                     ),
-                    MessageTemplateAction(
+                    MessageAction(
                         label='大樂透',
                         text='bl'
                     )
