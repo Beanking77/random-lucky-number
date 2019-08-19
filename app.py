@@ -50,9 +50,25 @@ def handle_message(event):
     game_type = event.message.text.split(' ')[0]
     game_category = ""
     if game_type != "wl" and game_type != "bl":
+        buttons_template = TemplateSendMessage(
+        alt_text='Buttons Template',
+        template=ButtonsTemplate(
+            title='發大財囉～～',
+            text='點選一個開始產生幸運號碼！',
+            thumbnail_image_url='顯示在開頭的大圖片網址',
+            actions=[
+                MessageTemplateAction(
+                    label='威力彩',
+                    text='wl'
+                ),
+                MessageTemplateAction(
+                    label='大樂透',
+                    text='bl'
+                )
+            ]
+        )
         line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="目前支援關鍵字: wl, bl"))   
+            event.reply_token, buttons_template)   
         return
     elif (game_type == "wl"):
         game_category = "lotto38"
