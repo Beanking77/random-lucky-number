@@ -107,7 +107,6 @@ def getHistoryNormalNumber(url, game_type):
         wei_li.append(int(i.text))
     
     for k in range(1,num_length):
-    #    print(str(k)+": " + "{:.0%}".format(wei_li.count(k)/float(len(wei_li))))
         wei_li.append(k)
     return wei_li
 
@@ -119,7 +118,6 @@ def getHistorySpecialNumber(url):
     for j in soup.find_all(style="color:blue; font-weight:bold"):
         special_ball.append(int(j.text))
     for l in range(1,9):
-    #    print(str(l)+": " + "{:.0%}".format(special_ball.count(l)/float(len(special_ball))))
         special_ball.append(l)
     return special_ball
 
