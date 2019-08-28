@@ -24,7 +24,6 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.environ['LINE_BOT_API_ID'])
 handler = WebhookHandler(os.environ['WEBHOOK_HANDLER_ID'])
 
-
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -46,7 +45,6 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    
     game_type = event.message.text.split(' ')[0]
     game_category = ""
     if game_type != "wl" and game_type != "bl":
@@ -67,6 +65,7 @@ def handle_message(event):
                 ]
             )
         )
+        # 踩雷: reply_token 只能用一次
         line_bot_api.reply_message(
             event.reply_token, buttons_template)   
         return
@@ -93,6 +92,7 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=msg))
     
+# 取得歷史中獎號碼
 def getHistoryNormalNumber(url, game_type):
     res  = requests.get(url)
     soup = BeautifulSoup(res.text,'html.parser')
@@ -110,6 +110,7 @@ def getHistoryNormalNumber(url, game_type):
         wei_li.append(k)
     return wei_li
 
+# 取得歷史中獎特別號
 def getHistorySpecialNumber(url):
     res  = requests.get(url)
     soup = BeautifulSoup(res.text,'html.parser')
@@ -121,6 +122,7 @@ def getHistorySpecialNumber(url):
         special_ball.append(l)
     return special_ball
 
+# 產生幸運號碼
 def getMagicNumber(url, game_type):
     normal = getHistoryNormalNumber(url, game_type)
     if game_type == "wl":
