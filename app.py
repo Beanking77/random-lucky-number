@@ -138,18 +138,15 @@ def getMagicNumber(url, game_type):
         return sorted(jp), random.choice(s)
     
     if game_type == "bl":
-        num_length = 7
+        num_length = 6
         jp=[]
         n=0
         while n < num_length:
             m = random.choice(normal) 
             if m not in jp:
-                if n == 6:
-                    s = m
-                else:
-                    jp.append(m)
+                jp.append(m)
                 n += 1
-        return sorted(jp), s
+        return sorted(jp)
     return
 
 if __name__ == '__main__':
