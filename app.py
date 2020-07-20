@@ -75,19 +75,31 @@ def handle_message(event):
     elif (game_type == "bl"):
         game_category = "lotto649"
         game_name = "大樂透"
+    elif (game_type == "wl_result"):
+        game_category = "lotto38"
+        game_name = "威力彩"        
+    elif (game_type == "bl_result"):
+        game_category = "lotto649"
+        game_name = "大樂透"
     if event.source.type == "room":
         to_id = event.source.room_id
     else:
         to_id = event.source.user_id
     print event.source.type, to_id
-    line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"幸運數字產生中..."))
-    msg = game_name + " 幸運數字:\n"
-    url = "http://www.9800.com.tw/"+game_category+"/statistics10.html"
-    msg += "近10期隨機: %s\n" % str(getMagicNumber(url, game_type))
-    url = "http://www.9800.com.tw/"+game_category+"/statistics.html"
-    msg += "近20期隨機: %s\n" % str(getMagicNumber(url, game_type)) 
-    url = "http://www.9800.com.tw/"+game_category+"/statistics50.html"
-    msg += "近50期隨機: %s\n" % str(getMagicNumber(url, game_type))
+    if "_result" in game_type:
+        line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"取得近期彩號中..."))
+        msg = game_name + " 近期彩號:\n"
+        url = "http://www.9800.com.tw/"+game_category
+        msg += "%s" % str(getResult(url, game_type))
+    else:
+        line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"幸運數字產生中..."))
+        msg = game_name + " 幸運數字:\n"
+        url = "http://www.9800.com.tw/"+game_category+"/statistics10.html"
+        msg += "近10期隨機: %s\n" % str(getMagicNumber(url, game_type))
+        url = "http://www.9800.com.tw/"+game_category+"/statistics.html"
+        msg += "近20期隨機: %s\n" % str(getMagicNumber(url, game_type)) 
+        url = "http://www.9800.com.tw/"+game_category+"/statistics50.html"
+        msg += "近50期隨機: %s\n" % str(getMagicNumber(url, game_type))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
@@ -148,6 +160,19 @@ def getMagicNumber(url, game_type):
                 n += 1
         return sorted(jp)
     return
+
+def getResult(url, game_type):
+    html = urllib.request.urlopen(url).read()
+    bs = BeautifulSoup(html, "lxml")
+    table = bs.find(lambda tag: tag.has_attr('id') and tag['id']=="news_sort")
+    rows = table.findAll(lambda tag: tag.name=='tr')
+    res = []
+    for i in rows:
+        if "\n\n" in i.text:
+            res.append("\n"+i.text.strip())
+        else:
+            res.append(i.text)
+    return res
 
 if __name__ == '__main__':
     myPORT = int(os.environ.get('PORT', 5000))
