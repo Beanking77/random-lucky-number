@@ -53,7 +53,7 @@ def callback():
 def handle_message(event):
     game_type = event.message.text.split(' ')[0]
     game_category = ""
-    if game_type != "wl" and game_type != "bl":
+    if game_type != "wl" and game_type != "bl" and game_type != "wl_result" and game_type != "bl_result":
         buttons_template = TemplateSendMessage(
             alt_text='Buttons Template',
             template=ButtonsTemplate(
