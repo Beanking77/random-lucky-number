@@ -3,4 +3,3 @@ flask
 requests
 BeautifulSoup
 bs4
-urllib2
