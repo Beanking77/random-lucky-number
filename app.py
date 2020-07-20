@@ -2,7 +2,12 @@
 # -*- coding: utf-8 -*
 
 import requests
-import urllib.request
+try:
+    # For Python 3.0 and later
+    from urllib.request import urlopen
+except ImportError:
+    # Fall back to Python 2's urllib2
+    from urllib2 import urlopen
 import re
 from bs4 import BeautifulSoup
 import random
@@ -163,8 +168,8 @@ def getMagicNumber(url, game_type):
     return
 
 def getResult(url, game_type):
-    html = urllib.request.urlopen(url).read()
-    bs = BeautifulSoup(html, "lxml")
+    html = urlopen(url).read()
+    bs = BeautifulSoup(html.decode('utf-8'), "lxml")
     table = bs.find(lambda tag: tag.has_attr('id') and tag['id']=="news_sort")
     rows = table.findAll(lambda tag: tag.name=='tr')
     res = []
