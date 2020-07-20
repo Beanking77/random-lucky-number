@@ -22,8 +22,8 @@ Get random lucky number from line bot.
  5. Buy those number and finger cross!!
  
 ## 螢幕截圖 / Screen Shots:
-![result1.PNG](result1.png?raw=true)
-![result2.PNG](result2.png?raw=true)
+![result1.PNG](result1.PNG?raw=true)
+![result2.PNG](result2.PNG?raw=true)
 
 ## Line QR Code:
 ![Bot QR Code](473zhvyh.png?raw=true)
