@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*
 
 import requests
+import urllib.request
 import re
 from bs4 import BeautifulSoup
 import random
