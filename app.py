@@ -96,7 +96,7 @@ def handle_message(event):
         line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"取得近期彩號中..."))
         msg = game_name + " 近期彩號:\n"
         url = "http://www.9800.com.tw/"+game_category
-        msg += "%s" % getResult(url, game_type)
+        msg += getResult(url, game_type)
     else:
         line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"幸運數字產生中..."))
         msg = game_name + " 幸運數字:\n"
