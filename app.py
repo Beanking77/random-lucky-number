@@ -177,7 +177,7 @@ def getResult(url, game_type):
         res += "=======================\n"
         if i.text != "":
             res += i.text.strip()+"\n"
-    return res
+    return res.encode('utf-8')
 
 if __name__ == '__main__':
     myPORT = int(os.environ.get('PORT', 5000))
