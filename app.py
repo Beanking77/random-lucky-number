@@ -174,7 +174,7 @@ def getResult(url, game_type):
     rows = table.findAll(lambda tag: tag.name=='tr')
     res = ""
     for i in rows:
-        res += "======================\n"
+        res += "\n======================\n"
         if i.text != "":
             res += i.text.strip().replace('\n\n', '\n')
     return res.encode('utf-8')
