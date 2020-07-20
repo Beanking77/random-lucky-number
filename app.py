@@ -96,7 +96,7 @@ def handle_message(event):
         line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"取得近期彩號中..."))
         msg = game_name + " 近期彩號:\n"
         url = "http://www.9800.com.tw/"+game_category
-        msg += "%s" % str(getResult(url, game_type))
+        msg += "%s" % getResult(url, game_type)
     else:
         line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"幸運數字產生中..."))
         msg = game_name + " 幸運數字:\n"
@@ -169,15 +169,14 @@ def getMagicNumber(url, game_type):
 
 def getResult(url, game_type):
     html = urlopen(url).read()
-    bs = BeautifulSoup(html.decode('utf-8'), "lxml")
+    bs = BeautifulSoup(html, "lxml")
     table = bs.find(lambda tag: tag.has_attr('id') and tag['id']=="news_sort")
     rows = table.findAll(lambda tag: tag.name=='tr')
     res = []
     for i in rows:
-        if "\n\n" in i.text:
-            res.append("\n"+i.text.strip())
-        else:
-            res.append(i.text)
+        res += "=======================\n"
+        if i.text != "":
+            res.append(i.text.strip()+"\n")
     return res
 
 if __name__ == '__main__':
