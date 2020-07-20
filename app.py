@@ -172,11 +172,11 @@ def getResult(url, game_type):
     bs = BeautifulSoup(html, "lxml")
     table = bs.find(lambda tag: tag.has_attr('id') and tag['id']=="news_sort")
     rows = table.findAll(lambda tag: tag.name=='tr')
-    res = []
+    res = ""
     for i in rows:
         res += "=======================\n"
         if i.text != "":
-            res.append(i.text.strip()+"\n")
+            res += i.text.strip()+"\n"
     return res
 
 if __name__ == '__main__':
