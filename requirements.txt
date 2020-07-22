@@ -4,4 +4,7 @@ requests
 BeautifulSoup
 bs4
 lxml
-dbModel
+Flask
+Flask-Migrate
+Flask-Script
+psycopg2
