@@ -99,12 +99,12 @@ def handle_message(event):
         print e
     # error handle
     if "_result" in game_type:
-        line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"取得近期彩號中..."))
+        #line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"取得近期彩號中..."))
         msg = game_name + " 近期彩號:\n"
         url = "http://www.9800.com.tw/"+game_category
         msg += getResult(url, game_type)
     else:
-        line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"幸運數字產生中..."))
+        #line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"幸運數字產生中..."))
         msg = game_name + " 幸運數字:\n"
         url = "http://www.9800.com.tw/"+game_category+"/statistics10.html"
         msg += "近10期隨機: %s\n" % str(getMagicNumber(url, game_type))
