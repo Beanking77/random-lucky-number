@@ -97,7 +97,7 @@ def handle_message(event):
     print event.source.type, to_id
     try:
         user_profile = line_bot_api.get_profile(to_id)
-        print user_profile.displayName
+        print user_profile['displayName']
     except LineBotApiError as e:
         print e
     # error handle
@@ -119,7 +119,7 @@ def handle_message(event):
         print('-----in----------')
         add_data = usermessage(
                 id = to_id,
-                user_name = user_profile.displayName,
+                user_name = user_profile['displayName'],
                 message = msg,
                 date = datetime.fromtimestamp(int(bodyjson['events'][0]['timestamp'])/1000)
             )
