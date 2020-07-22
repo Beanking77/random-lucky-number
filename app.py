@@ -115,18 +115,22 @@ def handle_message(event):
         #line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"幸運數字產生中..."))
         msg = game_name + " 幸運數字:\n"
         url = "http://www.9800.com.tw/"+game_category+"/statistics10.html"
-        msg += "近10期隨機: \n%s\n" % str(getMagicNumber(url, game_type))
+        round_10 = str(getMagicNumber(url, game_type)
+        msg += "近10期隨機: \n%s\n" % str(round_10)
         url = "http://www.9800.com.tw/"+game_category+"/statistics.html"
-        msg += "近20期隨機: \n%s\n" % str(getMagicNumber(url, game_type)) 
+        round_20 = str(getMagicNumber(url, game_type)                       
+        msg += "近20期隨機: \n%s\n" % str(round_20) 
         url = "http://www.9800.com.tw/"+game_category+"/statistics50.html"
-        msg += "近50期隨機: \n%s\n" % str(getMagicNumber(url, game_type))
+        round_50 = str(getMagicNumber(url, game_type)                       
+        msg += "近50期隨機: \n%s\n" % str(round_50)
         #insertdata
+        numbers = round_10+",\n "+round_20+",\n "+round_50
         print('-----in----------')
         add_data = usermessage(
                 id = to_id,
                 user_name = userInfo['displayName'],
                 user_image = userInfo['pictureUrl'],
-                message = msg,
+                message = str(numbers),
                 date = datetime.datetime.now()
             )
         db.session.add(add_data)
