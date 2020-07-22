@@ -22,13 +22,13 @@ class usermessage(db.Model):
 
     def __init__(self
                  , id
-                 , user_id
+                 , user_name
                  , user_image
                  , message
                  , date
                  ):
         self.id = id
-        self.user_id = user_name
+        self.user_name = user_name
         self.user_image = user_image
         self.message = message
         self.date = date
