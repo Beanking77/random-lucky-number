@@ -127,7 +127,7 @@ def handle_message(event):
                 user_name = userInfo['displayName'],
                 user_iamge = userInfo['pictureUrl'],
                 message = msg,
-                date = datetime.datetime.fromtimestamp(int(bodyjson['events'][0]['timestamp'])/1000)
+                date = datetime.datetime.now()
             )
         db.session.add(add_data)
         db.session.commit()
