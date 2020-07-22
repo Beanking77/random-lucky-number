@@ -16,17 +16,20 @@ class usermessage(db.Model):
     __tablename__ = 'user_active_log'
     id = db.Column(db.String(50), primary_key=True)
     user_name = db.Column(db.String(50))
+    user_image = db.Column(db.String(50))
     message = db.Column(db.Text)
     date = db.Column(db.TIMESTAMP)
 
     def __init__(self
                  , id
                  , user_id
+                 , user_image
                  , message
                  , date
                  ):
         self.id = id
         self.user_id = user_name
+        self.user_image = user_image
         self.message = message
         self.date = date
 
