@@ -116,13 +116,13 @@ def handle_message(event):
         msg = game_name + " 幸運數字:\n"
         url = "http://www.9800.com.tw/"+game_category+"/statistics10.html"
         round_10 = str(getMagicNumber(url, game_type)
-        msg += "近10期隨機: \n%s\n" % str(round_10)
+        msg += "近10期隨機: \n%s\n" % round_10
         url = "http://www.9800.com.tw/"+game_category+"/statistics.html"
         round_20 = str(getMagicNumber(url, game_type)                       
-        msg += "近20期隨機: \n%s\n" % str(round_20) 
+        msg += "近20期隨機: \n%s\n" % round_20
         url = "http://www.9800.com.tw/"+game_category+"/statistics50.html"
         round_50 = str(getMagicNumber(url, game_type)                       
-        msg += "近50期隨機: \n%s\n" % str(round_50)
+        msg += "近50期隨機: \n%s\n" % round_50
         #insertdata
         numbers = round_10+",\n "+round_20+",\n "+round_50
         print('-----in----------')
