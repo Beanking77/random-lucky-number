@@ -14,9 +14,9 @@ manager.add_command('db', MigrateCommand)
 
 class usermessage(db.Model):
     __tablename__ = 'user_active_log'
-    id = db.Column(db.String(50), primary_key=True)
-    user_name = db.Column(db.String(50))
-    user_image = db.Column(db.String(50))
+    id = db.Column(db.String(150), primary_key=True)
+    user_name = db.Column(db.String(150))
+    user_image = db.Column(db.String(250))
     message = db.Column(db.Text)
     date = db.Column(db.TIMESTAMP)
 
