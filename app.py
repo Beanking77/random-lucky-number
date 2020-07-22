@@ -25,6 +25,9 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, MessageAction
 )
 
+from dbModel import *
+import json
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(os.environ['LINE_BOT_API_ID'])
@@ -94,7 +97,7 @@ def handle_message(event):
     print event.source.type, to_id
     try:
         user_profile = line_bot_api.get_profile(to_id)
-        print user_profile
+        print user_profile.displayName
     except LineBotApiError as e:
         print e
     # error handle
@@ -112,6 +115,17 @@ def handle_message(event):
         msg += "近20期隨機: \n%s\n" % str(getMagicNumber(url, game_type)) 
         url = "http://www.9800.com.tw/"+game_category+"/statistics50.html"
         msg += "近50期隨機: \n%s\n" % str(getMagicNumber(url, game_type))
+        #insertdata
+        print('-----in----------')
+        add_data = usermessage(
+                id = to_id,
+                user_name = user_profile.displayName,
+                message = msg,
+                date = datetime.fromtimestamp(int(bodyjson['events'][0]['timestamp'])/1000)
+            )
+        db.session.add(add_data)
+        db.session.commit()
+        db.close()
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
