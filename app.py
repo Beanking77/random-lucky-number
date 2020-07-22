@@ -135,7 +135,7 @@ def handle_message(event):
             )
         db.session.add(add_data)
         db.session.commit()
-        db.close()
+        #db.close()
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
