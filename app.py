@@ -125,7 +125,7 @@ def handle_message(event):
         add_data = usermessage(
                 id = to_id,
                 user_name = userInfo['displayName'],
-                user_iamge = userInfo['pictureUrl'],
+                user_image = userInfo['pictureUrl'],
                 message = msg,
                 date = datetime.datetime.now()
             )
