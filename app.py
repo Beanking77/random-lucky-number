@@ -107,11 +107,11 @@ def handle_message(event):
         #line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"幸運數字產生中..."))
         msg = game_name + " 幸運數字:\n"
         url = "http://www.9800.com.tw/"+game_category+"/statistics10.html"
-        msg += "近10期隨機: %s\n" % str(getMagicNumber(url, game_type))
+        msg += "近10期隨機: \n%s\n" % str(getMagicNumber(url, game_type))
         url = "http://www.9800.com.tw/"+game_category+"/statistics.html"
-        msg += "近20期隨機: %s\n" % str(getMagicNumber(url, game_type)) 
+        msg += "近20期隨機: \n%s\n" % str(getMagicNumber(url, game_type)) 
         url = "http://www.9800.com.tw/"+game_category+"/statistics50.html"
-        msg += "近50期隨機: %s\n" % str(getMagicNumber(url, game_type))
+        msg += "近50期隨機: \n%s\n" % str(getMagicNumber(url, game_type))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
