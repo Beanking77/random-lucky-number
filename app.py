@@ -29,7 +29,7 @@ from dbModel import *
 import json
 import datetime
 
-app = Flask(__name__)
+#app = Flask(__name__)
 
 line_bot_api = LineBotApi(os.environ['LINE_BOT_API_ID'])
 handler = WebhookHandler(os.environ['WEBHOOK_HANDLER_ID'])
