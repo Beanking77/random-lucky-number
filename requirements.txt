@@ -4,3 +4,4 @@ requests
 BeautifulSoup
 bs4
 lxml
+dbModel
