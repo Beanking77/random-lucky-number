@@ -92,6 +92,12 @@ def handle_message(event):
     else:
         to_id = event.source.user_id
     print event.source.type, to_id
+    try:
+        user_profile = line_bot_api.get_profile(to_id)
+        print user_profile
+    except LineBotApiError as e:
+        print e
+    # error handle
     if "_result" in game_type:
         line_bot_api.push_message(to_id, TextSendMessage(text=game_name+"取得近期彩號中..."))
         msg = game_name + " 近期彩號:\n"
