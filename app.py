@@ -131,7 +131,7 @@ def handle_message(event):
         print('-----in----------')
         add_data = usermessage(
                 id = to_id,
-                user_name = userInfo['displayName'],
+                user_name = userInfo['displayName'].encode('utf-8'),
                 user_image = userInfo['pictureUrl'],
                 message = str(numbers),
                 date = datetime.datetime.now()
