@@ -103,6 +103,7 @@ def handle_message(event):
         userInfo_dump = json.dumps(user_profile) #, ensure_ascii=False, encoding='utf-8')
         print userInfo_dump
         userInfo = json.loads(userInfo_dump, encoding='utf-8')
+        userInfo = list(userInfo)
         print userInfo
         print userInfo['displayName']
         print userInfo['pictureUrl']
