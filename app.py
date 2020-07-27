@@ -99,7 +99,8 @@ def handle_message(event):
     try:
         user_profile = line_bot_api.get_profile(to_id)
         user_profile = str(user_profile).replace("'",'"')
-        userInfo = json.loads(str(user_profile), encoding='utf-8')
+        #userInfo = json.loads(str(user_profile), encoding='utf-8')
+        userInfo = json.dumps(str(user_profile), ensure_ascii=False, encoding='utf-8'))
         print userInfo
         print userInfo['displayName']
         print userInfo['pictureUrl']
