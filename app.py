@@ -100,12 +100,10 @@ def handle_message(event):
         user_profile = line_bot_api.get_profile(to_id)
         print user_profile
         user_profile = str(user_profile).replace("'",'"')
-        userInfo_dump = json.dumps(str(user_profile)) #, ensure_ascii=False, encoding='utf-8')
-        print userInfo_dump
-        userInfo = json.loads(str(userInfo_dump), encoding='utf-8')
+        #userInfo_dump = json.dumps(str(user_profile)) #, ensure_ascii=False, encoding='utf-8')
+        #print userInfo_dump
+        userInfo = json.loads(str(user_profile), encoding='utf-8')
         print userInfo
-        for i in userInfo:
-            print i
         print userInfo['displayName']
         print userInfo['pictureUrl']
     except LineBotApiError as e:
