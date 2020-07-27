@@ -28,6 +28,8 @@ from linebot.models import (
 from dbModel import *
 import json
 import datetime
+import sys
+sys.setdefaultencoding('utf8') 
 
 #app = Flask(__name__)
 
