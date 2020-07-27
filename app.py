@@ -104,7 +104,7 @@ def handle_message(event):
         #print userInfo_dump
         userInfo = json.loads(str(user_profile), encoding='utf-8')
         print userInfo
-        print userInfo['displayName']
+        print userInfo['displayName'].encode('utf-8')
         print userInfo['pictureUrl']
     except LineBotApiError as e:
         print e
