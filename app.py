@@ -101,7 +101,7 @@ def handle_message(event):
         user_profile = str(user_profile).replace("'",'"')
         userInfo = json.loads(str(user_profile))
         print userInfo
-        print userInfo['displayName']
+        print str(userInfo['displayName']).encode('utf-8')
         print userInfo['pictureUrl']
     except LineBotApiError as e:
         print e
@@ -128,7 +128,7 @@ def handle_message(event):
         print('-----in----------')
         add_data = usermessage(
                 id = to_id,
-                user_name = userInfo['displayName'],
+                user_name = str(userInfo['displayName']).encode('utf-8'),
                 user_image = userInfo['pictureUrl'],
                 message = str(numbers),
                 date = datetime.datetime.now()
